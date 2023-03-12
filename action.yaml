@@ -1,0 +1,71 @@
+---
+name: 'nix-update action'
+description: 'A GitHub action that detects and updates flake outputs via nix-update tool'
+inputs:
+  packages:
+    description: 'A space-separated list of inputs to update. Leave empty to update all inputs.'
+    required: false
+    default: ''
+  blacklist:
+    description: 'A list of dependencies, comma separated, to skip from updating.'
+    required: false
+    default: ''
+  ignore_errors:
+    description: 'If `true`, will ignore all updating errors'
+    required: false
+    default: false
+  branch:
+    description: 'The branch of the PR to be created'
+    required: false
+    default: "chore/nix_update_actions"
+  pr-title:
+    description: 'The title of the PR to be created'
+    required: false
+    default: "Packages: update"
+  pr-body:
+    description: 'The body of the PR to be created'
+    required: false
+    default: |
+      Automated changes by the [nix-update-actions](https://github.com/selfuryon/nix-update-action) GitHub Action.
+  pr-labels:
+    description: 'A comma or newline separated list of labels to set on the Pull Request to be created'
+    required: false
+    default: ''
+  pr-assignees:
+    description: 'A comma or newline separated list of assignees (GitHub usernames).'
+    required: false
+    default: ''
+  pr-reviewers:
+    description: 'A comma or newline separated list of reviewers (GitHub usernames) to request a review from.'
+    required: false
+    default: ''
+outputs:
+  pull-request-number:
+    description: 'The number of the opened pull request'
+    value: ${{ steps.create-pr.outputs.pull-request-number }}
+runs:
+  using: "composite"
+  steps:
+    - uses: yaxitech/nix-install-pkgs-action@v3
+      with:
+        packages: "nixpkgs#nix-update, nixpkgs#jq"
+    - name: Run nix-update
+      run: $GITHUB_ACTION_PATH/nix-update.sh
+      shell: bash
+      env:
+        PACKAGES: ${{ inputs.inputs }}
+        BLACKLIST: ${{ inputs.blacklist }}
+        IGNORE_ERRORS: ${{ inputs.ignore_errors }}
+    - name: Create PR
+      id: create-pr
+      uses: peter-evans/create-pull-request@v4
+      with:
+        branch: ${{ inputs.branch }}
+        delete-branch: true
+        title: ${{ inputs.pr-title }}
+        assignees: ${{ inputs.pr-assignees }}
+        labels: ${{ inputs.pr-labels }}
+        reviewers: ${{ inputs.pr-reviewers }}
+        body: ${{ inputs.pr-body }}
+
+
