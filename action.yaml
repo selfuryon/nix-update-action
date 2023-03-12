@@ -49,6 +49,7 @@ runs:
     - uses: yaxitech/nix-install-pkgs-action@v3
       with:
         packages: "nixpkgs#nix-update, nixpkgs#jq"
+        inputs-from: nixpkgs
     - name: Run nix-update
       run: $GITHUB_ACTION_PATH/nix-update.sh
       shell: bash
