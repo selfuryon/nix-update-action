@@ -27,8 +27,8 @@ updatePackages() {
         echo "Package '$PACKAGE' is blacklisted, skipping."
         continue
     fi
-    nix-update --flake --commit "$PACKAGE"
-    
+    echo "Update package '$PACKAGE'."
+    nix-update --flake --commit "$PACKAGE" 1>/dev/null
   done
 }
 
