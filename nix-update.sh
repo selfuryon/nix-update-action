@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# This function will modify all INPUT_* variables so that they don't contain any garbage
+enterFlakeFolder() {
+  if [[ -n "$PATH_TO_FLAKE_DIR" ]]; then
+    cd "$PATH_TO_FLAKE_DIR"
+  fi
+}
+
 sanitizeInputs() {
   # remove all whitespace
   PACKAGES="${PACKAGES// /}"
@@ -16,11 +21,6 @@ determinePackages() {
 }
 
 updatePackages() {
-  # Check tolerance to failed updates
-  if [[ $IGNORE_ERRORS == 'true' ]]; then
-    set +euo pipefail
-  fi
-
   # update packages
   for PACKAGE in ${PACKAGES//,/ }; do
     if [[ ",$BLACKLIST," == *",$PACKAGE,"* ]]; then
@@ -32,6 +32,7 @@ updatePackages() {
   done
 }
 
+enterFlakeFolder
 sanitizeInputs
 determinePackages
 updatePackages

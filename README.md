@@ -1,3 +1,3 @@
-# Update packages
+# nix-update-action
 
-This action uses `nix-update` to update flake output packages
+This action uses `nix-update` to update flake packages
