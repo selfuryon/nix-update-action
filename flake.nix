@@ -14,7 +14,6 @@
     #   url = "github:hercules-ci/pre-commit-hooks.nix/flakeModule";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    mission-control.url = "github:Platonic-Systems/mission-control";
 
     # utils
     treefmt-nix = {
@@ -37,7 +36,6 @@
     {
       imports = [
         inputs.flake-root.flakeModule
-        inputs.mission-control.flakeModule
         inputs.treefmt-nix.flakeModule
       ];
       systems = ["x86_64-linux"];
@@ -49,14 +47,13 @@
         inputs',
         ...
       }: let
-        inherit (config.mission-control) installToDevShell;
         inherit (pkgs) mkShellNoCC;
       in {
-        devShells.default = installToDevShell (mkShellNoCC {
+        devShells.default = mkShellNoCC {
           packages = with pkgs; [
             shellcheck
           ];
-        });
+        };
         treefmt.config = {
           inherit (config.flake-root) projectRootFile;
           package = pkgs.treefmt;
@@ -68,15 +65,6 @@
         };
 
         formatter = config.treefmt.build.wrapper;
-        mission-control = {
-          scripts = {
-            fmt = {
-              category = "Tools";
-              description = "Format the source tree";
-              exec = "${lib.getExe config.treefmt.build.wrapper}";
-            };
-          };
-        };
       };
     };
 }
