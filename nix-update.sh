@@ -28,7 +28,14 @@ updatePackages() {
         continue
     fi
     echo "Updating package '$PACKAGE'."
-    nix-update --flake --commit "$PACKAGE" 1>/dev/null
+    # if current version is unstable, update to latest commit of default branch
+    CURRENT_VERSION=$(nix derivation show .#"$PACKAGE" | jq -r '.[].env.version')
+    if [[ $CURRENT_VERSION == *"unstable"* ]]; then
+      VERSION_FLAG="branch"
+    else
+      VERSION_FLAG="stable"
+    fi
+    nix-update --flake --commit --version="$VERSION_FLAG" "$PACKAGE" 1>/dev/null
   done
 }
 

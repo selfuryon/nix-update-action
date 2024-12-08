@@ -81,7 +81,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: yaxitech/nix-install-pkgs-action@v3
+    - uses: yaxitech/nix-install-pkgs-action@v5
       with:
         packages: "nix-update,jq"
         inputs-from: nixpkgs
@@ -131,7 +131,7 @@ runs:
         PATH_TO_FLAKE_DIR: ${{ inputs.path-to-flake-dir }}
     - name: Create PR
       id: create-pr
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v7
       with:
         token: ${{ inputs.token }}
         branch: ${{ inputs.branch }}
