@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         uses: selfuryon/nix-update-action@v1
 ```
@@ -48,6 +50,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         uses: selfuryon/nix-update-action@v1
         with:
@@ -72,6 +76,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         uses: selfuryon/nix-update-action@v1
         with:
@@ -96,6 +102,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         id: update
         uses: selfuryon/nix-update-action@v1
@@ -121,6 +129,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         id: update
         uses: selfuryon/nix-update-action@v1
@@ -159,6 +169,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         id: update
         uses: selfuryon/nix-update-action@v1
@@ -187,6 +199,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Nix
         uses: cachix/install-nix-action@v20
+        with:
+          nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
       - name: Update flake packages
         id: update
         uses: selfuryon/nix-update-action@v1
