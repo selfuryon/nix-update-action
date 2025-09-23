@@ -4,6 +4,12 @@ This action uses `nix-update` to update flake packages.
 
 Heavily inspired by [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock).
 
+## Installation
+
+Create a workflow file in your repository, for example `.github/workflows/nix-update.yaml` and start from one of the examples below.
+
+For this action to work you must explicitly allow GitHub Actions to create pull requests. This setting can be found in a repository's settings under Actions > General > Workflow permissions.
+
 ## Examples
 
 There are several examples of how to use this workflow to update flake packages.
@@ -18,6 +24,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -40,6 +49,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -64,6 +76,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -88,6 +103,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -113,6 +131,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -151,6 +172,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
@@ -179,6 +203,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
